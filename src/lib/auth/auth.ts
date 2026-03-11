@@ -28,23 +28,6 @@ export const auth = betterAuth({
     },
   },
 
-  // https://www.better-auth.com/docs/concepts/oauth
-  socialProviders: {
-    github: {
-      clientId: env.GITHUB_CLIENT_ID!,
-      clientSecret: env.GITHUB_CLIENT_SECRET!,
-    },
-    google: {
-      clientId: env.GOOGLE_CLIENT_ID!,
-      clientSecret: env.GOOGLE_CLIENT_SECRET!,
-    },
-  },
-
-  // https://www.better-auth.com/docs/authentication/email-password
-  emailAndPassword: {
-    enabled: true,
-  },
-
   experimental: {
     // https://www.better-auth.com/docs/adapters/drizzle#joins-experimental
     joins: true,

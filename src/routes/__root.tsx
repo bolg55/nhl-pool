@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import type { AuthQueryResult } from "@/lib/auth/queries";
 
-import appCss from "@/styles.css?url";
+import appCss from "@/styles/globals.css?url";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -38,10 +38,9 @@ export const Route = createRootRouteWithContext<{
       },
     ],
     links: [
-      // Replace with your icons here, or remove if you have a favicon.ico in public/
       {
         rel: "icon",
-        href: "https://mugnavo.com/favicon.ico",
+        href: "/favicon.ico",
       },
       { rel: "stylesheet", href: appCss },
     ],
