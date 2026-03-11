@@ -1,0 +1,26 @@
+node_modules
+
+.DS_Store
+.cache
+.env
+.env.local
+
+.data
+.vercel
+.output
+.wrangler
+.netlify
+dist
+/build/
+/api/
+/server/build
+/public/build
+
+.tanstack
+.vinxi
+
+# BMAD and Claude
+_bmad
+_bmad-output
+.claude
+.mcp.json
