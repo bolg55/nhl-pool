@@ -1,7 +1,7 @@
 import "@tanstack/react-start/server-only";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { betterAuth } from "better-auth/minimal";
-import { emailOTP } from "better-auth/plugins";
+import { emailOTP, username } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 
 import { env } from "@/env/server";
@@ -26,6 +26,10 @@ export const auth = betterAuth({
       async sendVerificationOTP({ email, otp, type }) {
         await sendOtpEmail(email, otp, type);
       },
+    }),
+    username({
+      minUsernameLength: 3,
+      maxUsernameLength: 20,
     }),
     tanstackStartCookies(), // MUST be last
   ],
