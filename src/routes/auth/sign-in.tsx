@@ -5,7 +5,7 @@ import { authQueryOptions } from "@/lib/auth/queries";
 
 export const Route = createFileRoute("/auth/sign-in")({
   beforeLoad: async ({ context }) => {
-    const user = await context.queryClient.ensureQueryData(authQueryOptions());
+    const user = await context.queryClient.fetchQuery(authQueryOptions());
 
     if (user) {
       throw redirect({ to: "/dashboard" });
