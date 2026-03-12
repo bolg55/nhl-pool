@@ -14,7 +14,7 @@ function DashboardPage() {
     <div className="flex items-center justify-center py-20">
       <div className="text-center">
         <h1 className="text-4xl font-bold">Dashboard</h1>
-        <p className="mt-2 text-muted-foreground">Welcome, {user?.email ?? "player"}!</p>
+        <p className="mt-2 text-muted-foreground">Welcome, {user?.name || user?.email}!</p>
         <div className="mt-4">
           <SignOutButton />
         </div>

@@ -4,15 +4,11 @@ import { NavBar } from "@/components/nav-bar";
 import { authQueryOptions } from "@/lib/auth/queries";
 
 export const Route = createFileRoute("/_authenticated")({
-  beforeLoad: async ({ context, location }) => {
+  beforeLoad: async ({ context }) => {
     const user = await context.queryClient.fetchQuery(authQueryOptions());
 
     if (!user) {
       throw redirect({ to: "/auth/sign-in" });
-    }
-
-    if (!user.username && !location.pathname.startsWith("/settings")) {
-      throw redirect({ to: "/settings", search: { setup: true } });
     }
   },
   component: AuthenticatedLayout,

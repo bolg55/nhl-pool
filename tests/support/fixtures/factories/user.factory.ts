@@ -32,8 +32,6 @@ export interface UserData {
   email: string;
   emailVerified: boolean;
   image: string | null;
-  username: string | null;
-  displayUsername: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -52,7 +50,6 @@ export function buildUser(overrides: UserOverrides = {}): UserData {
   const now = new Date().toISOString();
   const firstName = faker.person.firstName();
   const lastName = faker.person.lastName();
-  const username = faker.internet.username({ firstName, lastName }).toLowerCase();
 
   return {
     id: faker.string.uuid(),
@@ -60,8 +57,6 @@ export function buildUser(overrides: UserOverrides = {}): UserData {
     email: faker.internet.email({ firstName, lastName }).toLowerCase(),
     emailVerified: false,
     image: null,
-    username,
-    displayUsername: username,
     createdAt: now,
     updatedAt: now,
     ...overrides,

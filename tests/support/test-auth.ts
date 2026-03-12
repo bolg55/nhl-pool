@@ -20,7 +20,7 @@ config({ path: ".env.local" });
 
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { betterAuth } from "better-auth";
-import { emailOTP, username } from "better-auth/plugins";
+import { emailOTP } from "better-auth/plugins";
 import { testUtils } from "better-auth/plugins";
 import type { TestHelpers } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -53,10 +53,6 @@ export const testAuth = betterAuth({
         // In test mode, OTPs are captured by testUtils — no email sending needed
         console.log(`[test] OTP for ${email} (${type}): ${otp}`);
       },
-    }),
-    username({
-      minUsernameLength: 3,
-      maxUsernameLength: 20,
     }),
     testUtils({ captureOTP: true }),
   ],
