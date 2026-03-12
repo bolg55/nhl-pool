@@ -19,6 +19,13 @@ dist
 .tanstack
 .vinxi
 
+# Test artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/pacts/
+pact-logs/
+
 # BMAD and Claude
 _bmad
 _bmad-output
