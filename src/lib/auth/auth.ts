@@ -1,11 +1,13 @@
 import "@tanstack/react-start/server-only";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { betterAuth } from "better-auth/minimal";
+import { emailOTP } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 
 import { env } from "@/env/server";
 import { db } from "@/server/db";
 import * as schema from "@/server/db/schema";
+import { sendOtpEmail } from "@/server/services/email-service";
 
 export const auth = betterAuth({
   baseURL: env.VITE_BASE_URL,
@@ -18,7 +20,15 @@ export const auth = betterAuth({
   }),
 
   // https://www.better-auth.com/docs/integrations/tanstack#usage-tips
-  plugins: [tanstackStartCookies()],
+  plugins: [
+    emailOTP({
+      expiresIn: 300, // 5 minutes — must match otp-code.tsx template text
+      async sendVerificationOTP({ email, otp, type }) {
+        await sendOtpEmail(email, otp, type);
+      },
+    }),
+    tanstackStartCookies(), // MUST be last
+  ],
 
   // https://www.better-auth.com/docs/concepts/session-management#session-caching
   session: {

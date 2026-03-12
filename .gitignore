@@ -24,3 +24,4 @@ _bmad
 _bmad-output
 .claude
 .mcp.json
+.playwright-mcp

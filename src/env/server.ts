@@ -6,6 +6,8 @@ export const env = createEnv({
     DATABASE_URL: z.url(),
     VITE_BASE_URL: z.url().default("http://localhost:3000"),
     BETTER_AUTH_SECRET: z.string().min(1),
+    RESEND_API_KEY: z.string().min(1),
+    RESEND_FROM_EMAIL: z.string().default("NHL Pool <onboarding@resend.dev>"),
   },
   runtimeEnv: process.env,
 });
