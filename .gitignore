@@ -26,6 +26,9 @@ dist
 /pacts/
 pact-logs/
 
+# Worktrees
+.worktrees
+
 # BMAD and Claude
 _bmad
 _bmad-output
