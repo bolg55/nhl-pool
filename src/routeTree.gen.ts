@@ -20,6 +20,7 @@ import { Route as AuthenticatedPSlugRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAccountSettingsIndexRouteImport } from './routes/_authenticated/_account/settings/index'
 import { Route as AuthenticatedAccountDashboardIndexRouteImport } from './routes/_authenticated/_account/dashboard/index'
 import { Route as AuthenticatedPSlugStandingsIndexRouteImport } from './routes/_authenticated/p/$slug/standings/index'
+import { Route as AuthenticatedPSlugSettingsIndexRouteImport } from './routes/_authenticated/p/$slug/settings/index'
 import { Route as AuthenticatedPSlugRosterIndexRouteImport } from './routes/_authenticated/p/$slug/roster/index'
 import { Route as AuthenticatedPSlugLiveIndexRouteImport } from './routes/_authenticated/p/$slug/live/index'
 import { Route as AuthenticatedPSlugDashboardIndexRouteImport } from './routes/_authenticated/p/$slug/dashboard/index'
@@ -82,6 +83,12 @@ const AuthenticatedPSlugStandingsIndexRoute =
     path: '/standings/',
     getParentRoute: () => AuthenticatedPSlugRouteRoute,
   } as any)
+const AuthenticatedPSlugSettingsIndexRoute =
+  AuthenticatedPSlugSettingsIndexRouteImport.update({
+    id: '/settings/',
+    path: '/settings/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
 const AuthenticatedPSlugRosterIndexRoute =
   AuthenticatedPSlugRosterIndexRouteImport.update({
     id: '/roster/',
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
   '/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
   '/p/$slug/roster/': typeof AuthenticatedPSlugRosterIndexRoute
+  '/p/$slug/settings/': typeof AuthenticatedPSlugSettingsIndexRoute
   '/p/$slug/standings/': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -135,6 +143,7 @@ export interface FileRoutesByTo {
   '/p/$slug/dashboard': typeof AuthenticatedPSlugDashboardIndexRoute
   '/p/$slug/live': typeof AuthenticatedPSlugLiveIndexRoute
   '/p/$slug/roster': typeof AuthenticatedPSlugRosterIndexRoute
+  '/p/$slug/settings': typeof AuthenticatedPSlugSettingsIndexRoute
   '/p/$slug/standings': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRoutesById {
@@ -153,6 +162,7 @@ export interface FileRoutesById {
   '/_authenticated/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
   '/_authenticated/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
   '/_authenticated/p/$slug/roster/': typeof AuthenticatedPSlugRosterIndexRoute
+  '/_authenticated/p/$slug/settings/': typeof AuthenticatedPSlugSettingsIndexRoute
   '/_authenticated/p/$slug/standings/': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/p/$slug/dashboard/'
     | '/p/$slug/live/'
     | '/p/$slug/roster/'
+    | '/p/$slug/settings/'
     | '/p/$slug/standings/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/p/$slug/dashboard'
     | '/p/$slug/live'
     | '/p/$slug/roster'
+    | '/p/$slug/settings'
     | '/p/$slug/standings'
   id:
     | '__root__'
@@ -202,6 +214,7 @@ export interface FileRouteTypes {
     | '/_authenticated/p/$slug/dashboard/'
     | '/_authenticated/p/$slug/live/'
     | '/_authenticated/p/$slug/roster/'
+    | '/_authenticated/p/$slug/settings/'
     | '/_authenticated/p/$slug/standings/'
   fileRoutesById: FileRoutesById
 }
@@ -293,6 +306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPSlugStandingsIndexRouteImport
       parentRoute: typeof AuthenticatedPSlugRouteRoute
     }
+    '/_authenticated/p/$slug/settings/': {
+      id: '/_authenticated/p/$slug/settings/'
+      path: '/settings'
+      fullPath: '/p/$slug/settings/'
+      preLoaderRoute: typeof AuthenticatedPSlugSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
     '/_authenticated/p/$slug/roster/': {
       id: '/_authenticated/p/$slug/roster/'
       path: '/roster'
@@ -347,6 +367,7 @@ interface AuthenticatedPSlugRouteRouteChildren {
   AuthenticatedPSlugDashboardIndexRoute: typeof AuthenticatedPSlugDashboardIndexRoute
   AuthenticatedPSlugLiveIndexRoute: typeof AuthenticatedPSlugLiveIndexRoute
   AuthenticatedPSlugRosterIndexRoute: typeof AuthenticatedPSlugRosterIndexRoute
+  AuthenticatedPSlugSettingsIndexRoute: typeof AuthenticatedPSlugSettingsIndexRoute
   AuthenticatedPSlugStandingsIndexRoute: typeof AuthenticatedPSlugStandingsIndexRoute
 }
 
@@ -357,6 +378,7 @@ const AuthenticatedPSlugRouteRouteChildren: AuthenticatedPSlugRouteRouteChildren
       AuthenticatedPSlugDashboardIndexRoute,
     AuthenticatedPSlugLiveIndexRoute: AuthenticatedPSlugLiveIndexRoute,
     AuthenticatedPSlugRosterIndexRoute: AuthenticatedPSlugRosterIndexRoute,
+    AuthenticatedPSlugSettingsIndexRoute: AuthenticatedPSlugSettingsIndexRoute,
     AuthenticatedPSlugStandingsIndexRoute:
       AuthenticatedPSlugStandingsIndexRoute,
   }

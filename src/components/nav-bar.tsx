@@ -62,6 +62,7 @@ export function NavBar({ pool }: NavBarProps) {
         ...(pool.role === "owner"
           ? [{ to: "/p/$slug/admin" as const, label: "Admin", icon: RiAdminLine }]
           : []),
+        { to: "/p/$slug/settings" as const, label: "Settings", icon: RiSettingsLine },
       ]
     : [];
 
@@ -81,26 +82,29 @@ export function NavBar({ pool }: NavBarProps) {
             )}
           </div>
           <div className="flex items-center gap-1">
-            {poolTabs.map((tab) => (
+            {pool ? (
+              poolTabs.map((tab) => (
+                <Link
+                  key={tab.to}
+                  to={tab.to}
+                  params={{ slug: pool.slug }}
+                  className={cn(baseTrigger, desktopUnderline)}
+                  activeProps={{ className: cn(baseTrigger, activeTrigger) }}
+                >
+                  <tab.icon className="size-4" />
+                  {tab.label}
+                </Link>
+              ))
+            ) : (
               <Link
-                key={tab.to}
-                to={tab.to}
-                params={{ slug: pool!.slug }}
+                to="/settings"
                 className={cn(baseTrigger, desktopUnderline)}
                 activeProps={{ className: cn(baseTrigger, activeTrigger) }}
               >
-                <tab.icon className="size-4" />
-                {tab.label}
+                <RiSettingsLine className="size-4" />
+                Settings
               </Link>
-            ))}
-            <Link
-              to="/settings"
-              className={cn(baseTrigger, desktopUnderline)}
-              activeProps={{ className: cn(baseTrigger, activeTrigger) }}
-            >
-              <RiSettingsLine className="size-4" />
-              Settings
-            </Link>
+            )}
             <button onClick={handleSignOut} className={baseTrigger} type="button">
               <RiLogoutBoxLine className="size-4" />
               Sign Out
@@ -126,7 +130,8 @@ export function NavBar({ pool }: NavBarProps) {
               </Link>
             ))}
             <Link
-              to="/settings"
+              to="/p/$slug/settings"
+              params={{ slug: pool.slug }}
               className={cn(baseTrigger, mobileTab, mobileOverline)}
               activeProps={{ className: cn(baseTrigger, activeTrigger, mobileTab) }}
             >
