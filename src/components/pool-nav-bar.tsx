@@ -8,7 +8,7 @@ import {
   RiSettingsLine,
   RiTrophyLine,
 } from "@remixicon/react";
-import { Link, useParams } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
 
@@ -19,12 +19,11 @@ const activeTrigger = "text-foreground after:opacity-100";
 
 interface PoolNavBarProps {
   poolName: string;
+  slug: string;
   role: "owner" | "member";
 }
 
-export function PoolNavBar({ poolName, role }: PoolNavBarProps) {
-  const { slug } = useParams({ strict: false });
-
+export function PoolNavBar({ poolName, slug, role }: PoolNavBarProps) {
   const poolTabs = [
     { to: "/p/$slug/dashboard" as const, label: "Dashboard", icon: RiDashboardLine },
     { to: "/p/$slug/roster" as const, label: "Roster", icon: RiGroupLine },
@@ -51,7 +50,7 @@ export function PoolNavBar({ poolName, role }: PoolNavBarProps) {
               <Link
                 key={tab.to}
                 to={tab.to}
-                params={{ slug: slug! }}
+                params={{ slug }}
                 className={cn(
                   baseTrigger,
                   "after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:bg-foreground after:opacity-0 after:transition-opacity",
@@ -84,7 +83,7 @@ export function PoolNavBar({ poolName, role }: PoolNavBarProps) {
             <Link
               key={tab.to}
               to={tab.to}
-              params={{ slug: slug! }}
+              params={{ slug }}
               className={cn(
                 baseTrigger,
                 "flex-1 flex-col gap-1 py-2 text-xs",

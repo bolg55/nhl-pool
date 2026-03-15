@@ -8,8 +8,14 @@ export const Route = createFileRoute("/_authenticated/p/$slug")({
     try {
       const poolContext = await $getPoolBySlug({ data: { slug: params.slug } });
       return poolContext;
-    } catch {
-      throw redirect({ to: "/dashboard" });
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        ["Pool not found", "Not a member of this pool", "Unauthorized"].includes(error.message)
+      ) {
+        throw redirect({ to: "/dashboard" });
+      }
+      throw error;
     }
   },
   component: PoolLayout,
@@ -20,7 +26,7 @@ function PoolLayout() {
 
   return (
     <>
-      <PoolNavBar poolName={pool.name} role={role} />
+      <PoolNavBar poolName={pool.name} slug={pool.slug} role={role} />
       <div className="pb-16 md:pb-0">
         <Outlet />
       </div>
