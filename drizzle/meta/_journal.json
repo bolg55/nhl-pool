@@ -29,6 +29,13 @@
       "when": 1773291065687,
       "tag": "0003_nebulous_gertrude_yorkes",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1773558915909,
+      "tag": "0004_pink_wilson_fisk",
+      "breakpoints": true
     }
   ]
 }
