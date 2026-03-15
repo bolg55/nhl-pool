@@ -1,7 +1,7 @@
 import "@tanstack/react-start/server-only";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { betterAuth } from "better-auth/minimal";
-import { emailOTP } from "better-auth/plugins";
+import { emailOTP, organization } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 
 import { env } from "@/env/server";
@@ -27,6 +27,7 @@ export const auth = betterAuth({
         await sendOtpEmail(email, otp, type);
       },
     }),
+    organization(),
     tanstackStartCookies(), // MUST be last
   ],
 
