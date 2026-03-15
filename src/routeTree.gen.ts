@@ -14,11 +14,17 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
-import { Route as AuthenticatedStandingsIndexRouteImport } from './routes/_authenticated/standings/index'
-import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedRosterIndexRouteImport } from './routes/_authenticated/roster/index'
-import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
+import { Route as AuthenticatedAccountRouteRouteImport } from './routes/_authenticated/_account/route'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AuthenticatedPSlugRouteRouteImport } from './routes/_authenticated/p/$slug/route'
+import { Route as AuthenticatedAccountProfileIndexRouteImport } from './routes/_authenticated/_account/profile/index'
+import { Route as AuthenticatedAccountDashboardIndexRouteImport } from './routes/_authenticated/_account/dashboard/index'
+import { Route as AuthenticatedPSlugStandingsIndexRouteImport } from './routes/_authenticated/p/$slug/standings/index'
+import { Route as AuthenticatedPSlugRosterIndexRouteImport } from './routes/_authenticated/p/$slug/roster/index'
+import { Route as AuthenticatedPSlugProfileIndexRouteImport } from './routes/_authenticated/p/$slug/profile/index'
+import { Route as AuthenticatedPSlugLiveIndexRouteImport } from './routes/_authenticated/p/$slug/live/index'
+import { Route as AuthenticatedPSlugDashboardIndexRouteImport } from './routes/_authenticated/p/$slug/dashboard/index'
+import { Route as AuthenticatedPSlugAdminIndexRouteImport } from './routes/_authenticated/p/$slug/admin/index'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -44,28 +50,9 @@ const AuthCallbackRoute = AuthCallbackRouteImport.update({
   path: '/auth/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedStandingsIndexRoute =
-  AuthenticatedStandingsIndexRouteImport.update({
-    id: '/standings/',
-    path: '/standings/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedSettingsIndexRoute =
-  AuthenticatedSettingsIndexRouteImport.update({
-    id: '/settings/',
-    path: '/settings/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedRosterIndexRoute =
-  AuthenticatedRosterIndexRouteImport.update({
-    id: '/roster/',
-    path: '/roster/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardIndexRoute =
-  AuthenticatedDashboardIndexRouteImport.update({
-    id: '/dashboard/',
-    path: '/dashboard/',
+const AuthenticatedAccountRouteRoute =
+  AuthenticatedAccountRouteRouteImport.update({
+    id: '/_account',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
@@ -73,41 +60,110 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPSlugRouteRoute = AuthenticatedPSlugRouteRouteImport.update({
+  id: '/p/$slug',
+  path: '/p/$slug',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAccountProfileIndexRoute =
+  AuthenticatedAccountProfileIndexRouteImport.update({
+    id: '/profile/',
+    path: '/profile/',
+    getParentRoute: () => AuthenticatedAccountRouteRoute,
+  } as any)
+const AuthenticatedAccountDashboardIndexRoute =
+  AuthenticatedAccountDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedAccountRouteRoute,
+  } as any)
+const AuthenticatedPSlugStandingsIndexRoute =
+  AuthenticatedPSlugStandingsIndexRouteImport.update({
+    id: '/standings/',
+    path: '/standings/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
+const AuthenticatedPSlugRosterIndexRoute =
+  AuthenticatedPSlugRosterIndexRouteImport.update({
+    id: '/roster/',
+    path: '/roster/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
+const AuthenticatedPSlugProfileIndexRoute =
+  AuthenticatedPSlugProfileIndexRouteImport.update({
+    id: '/profile/',
+    path: '/profile/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
+const AuthenticatedPSlugLiveIndexRoute =
+  AuthenticatedPSlugLiveIndexRouteImport.update({
+    id: '/live/',
+    path: '/live/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
+const AuthenticatedPSlugDashboardIndexRoute =
+  AuthenticatedPSlugDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
+const AuthenticatedPSlugAdminIndexRoute =
+  AuthenticatedPSlugAdminIndexRouteImport.update({
+    id: '/admin/',
+    path: '/admin/',
+    getParentRoute: () => AuthenticatedPSlugRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
-  '/roster/': typeof AuthenticatedRosterIndexRoute
-  '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/standings/': typeof AuthenticatedStandingsIndexRoute
+  '/dashboard/': typeof AuthenticatedAccountDashboardIndexRoute
+  '/profile/': typeof AuthenticatedAccountProfileIndexRoute
+  '/p/$slug/admin/': typeof AuthenticatedPSlugAdminIndexRoute
+  '/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
+  '/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
+  '/p/$slug/profile/': typeof AuthenticatedPSlugProfileIndexRoute
+  '/p/$slug/roster/': typeof AuthenticatedPSlugRosterIndexRoute
+  '/p/$slug/standings/': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard': typeof AuthenticatedDashboardIndexRoute
-  '/roster': typeof AuthenticatedRosterIndexRoute
-  '/settings': typeof AuthenticatedSettingsIndexRoute
-  '/standings': typeof AuthenticatedStandingsIndexRoute
+  '/dashboard': typeof AuthenticatedAccountDashboardIndexRoute
+  '/profile': typeof AuthenticatedAccountProfileIndexRoute
+  '/p/$slug/admin': typeof AuthenticatedPSlugAdminIndexRoute
+  '/p/$slug/dashboard': typeof AuthenticatedPSlugDashboardIndexRoute
+  '/p/$slug/live': typeof AuthenticatedPSlugLiveIndexRoute
+  '/p/$slug/profile': typeof AuthenticatedPSlugProfileIndexRoute
+  '/p/$slug/roster': typeof AuthenticatedPSlugRosterIndexRoute
+  '/p/$slug/standings': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/_account': typeof AuthenticatedAccountRouteRouteWithChildren
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/_authenticated/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
-  '/_authenticated/roster/': typeof AuthenticatedRosterIndexRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/_authenticated/standings/': typeof AuthenticatedStandingsIndexRoute
+  '/_authenticated/_account/dashboard/': typeof AuthenticatedAccountDashboardIndexRoute
+  '/_authenticated/_account/profile/': typeof AuthenticatedAccountProfileIndexRoute
+  '/_authenticated/p/$slug/admin/': typeof AuthenticatedPSlugAdminIndexRoute
+  '/_authenticated/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
+  '/_authenticated/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
+  '/_authenticated/p/$slug/profile/': typeof AuthenticatedPSlugProfileIndexRoute
+  '/_authenticated/p/$slug/roster/': typeof AuthenticatedPSlugRosterIndexRoute
+  '/_authenticated/p/$slug/standings/': typeof AuthenticatedPSlugStandingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,34 +172,50 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/p/$slug'
     | '/api/auth/$'
     | '/dashboard/'
-    | '/roster/'
-    | '/settings/'
-    | '/standings/'
+    | '/profile/'
+    | '/p/$slug/admin/'
+    | '/p/$slug/dashboard/'
+    | '/p/$slug/live/'
+    | '/p/$slug/profile/'
+    | '/p/$slug/roster/'
+    | '/p/$slug/standings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/p/$slug'
     | '/api/auth/$'
     | '/dashboard'
-    | '/roster'
-    | '/settings'
-    | '/standings'
+    | '/profile'
+    | '/p/$slug/admin'
+    | '/p/$slug/dashboard'
+    | '/p/$slug/live'
+    | '/p/$slug/profile'
+    | '/p/$slug/roster'
+    | '/p/$slug/standings'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/_authenticated/_account'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/_authenticated/p/$slug'
     | '/api/auth/$'
-    | '/_authenticated/dashboard/'
-    | '/_authenticated/roster/'
-    | '/_authenticated/settings/'
-    | '/_authenticated/standings/'
+    | '/_authenticated/_account/dashboard/'
+    | '/_authenticated/_account/profile/'
+    | '/_authenticated/p/$slug/admin/'
+    | '/_authenticated/p/$slug/dashboard/'
+    | '/_authenticated/p/$slug/live/'
+    | '/_authenticated/p/$slug/profile/'
+    | '/_authenticated/p/$slug/roster/'
+    | '/_authenticated/p/$slug/standings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -192,32 +264,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/standings/': {
-      id: '/_authenticated/standings/'
-      path: '/standings'
-      fullPath: '/standings/'
-      preLoaderRoute: typeof AuthenticatedStandingsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/settings'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/roster/': {
-      id: '/_authenticated/roster/'
-      path: '/roster'
-      fullPath: '/roster/'
-      preLoaderRoute: typeof AuthenticatedRosterIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/': {
-      id: '/_authenticated/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+    '/_authenticated/_account': {
+      id: '/_authenticated/_account'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedAccountRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/auth/$': {
@@ -227,21 +278,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/p/$slug': {
+      id: '/_authenticated/p/$slug'
+      path: '/p/$slug'
+      fullPath: '/p/$slug'
+      preLoaderRoute: typeof AuthenticatedPSlugRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_account/profile/': {
+      id: '/_authenticated/_account/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof AuthenticatedAccountProfileIndexRouteImport
+      parentRoute: typeof AuthenticatedAccountRouteRoute
+    }
+    '/_authenticated/_account/dashboard/': {
+      id: '/_authenticated/_account/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedAccountDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedAccountRouteRoute
+    }
+    '/_authenticated/p/$slug/standings/': {
+      id: '/_authenticated/p/$slug/standings/'
+      path: '/standings'
+      fullPath: '/p/$slug/standings/'
+      preLoaderRoute: typeof AuthenticatedPSlugStandingsIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
+    '/_authenticated/p/$slug/roster/': {
+      id: '/_authenticated/p/$slug/roster/'
+      path: '/roster'
+      fullPath: '/p/$slug/roster/'
+      preLoaderRoute: typeof AuthenticatedPSlugRosterIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
+    '/_authenticated/p/$slug/profile/': {
+      id: '/_authenticated/p/$slug/profile/'
+      path: '/profile'
+      fullPath: '/p/$slug/profile/'
+      preLoaderRoute: typeof AuthenticatedPSlugProfileIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
+    '/_authenticated/p/$slug/live/': {
+      id: '/_authenticated/p/$slug/live/'
+      path: '/live'
+      fullPath: '/p/$slug/live/'
+      preLoaderRoute: typeof AuthenticatedPSlugLiveIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
+    '/_authenticated/p/$slug/dashboard/': {
+      id: '/_authenticated/p/$slug/dashboard/'
+      path: '/dashboard'
+      fullPath: '/p/$slug/dashboard/'
+      preLoaderRoute: typeof AuthenticatedPSlugDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
+    '/_authenticated/p/$slug/admin/': {
+      id: '/_authenticated/p/$slug/admin/'
+      path: '/admin'
+      fullPath: '/p/$slug/admin/'
+      preLoaderRoute: typeof AuthenticatedPSlugAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedPSlugRouteRoute
+    }
   }
 }
 
+interface AuthenticatedAccountRouteRouteChildren {
+  AuthenticatedAccountDashboardIndexRoute: typeof AuthenticatedAccountDashboardIndexRoute
+  AuthenticatedAccountProfileIndexRoute: typeof AuthenticatedAccountProfileIndexRoute
+}
+
+const AuthenticatedAccountRouteRouteChildren: AuthenticatedAccountRouteRouteChildren =
+  {
+    AuthenticatedAccountDashboardIndexRoute:
+      AuthenticatedAccountDashboardIndexRoute,
+    AuthenticatedAccountProfileIndexRoute:
+      AuthenticatedAccountProfileIndexRoute,
+  }
+
+const AuthenticatedAccountRouteRouteWithChildren =
+  AuthenticatedAccountRouteRoute._addFileChildren(
+    AuthenticatedAccountRouteRouteChildren,
+  )
+
+interface AuthenticatedPSlugRouteRouteChildren {
+  AuthenticatedPSlugAdminIndexRoute: typeof AuthenticatedPSlugAdminIndexRoute
+  AuthenticatedPSlugDashboardIndexRoute: typeof AuthenticatedPSlugDashboardIndexRoute
+  AuthenticatedPSlugLiveIndexRoute: typeof AuthenticatedPSlugLiveIndexRoute
+  AuthenticatedPSlugProfileIndexRoute: typeof AuthenticatedPSlugProfileIndexRoute
+  AuthenticatedPSlugRosterIndexRoute: typeof AuthenticatedPSlugRosterIndexRoute
+  AuthenticatedPSlugStandingsIndexRoute: typeof AuthenticatedPSlugStandingsIndexRoute
+}
+
+const AuthenticatedPSlugRouteRouteChildren: AuthenticatedPSlugRouteRouteChildren =
+  {
+    AuthenticatedPSlugAdminIndexRoute: AuthenticatedPSlugAdminIndexRoute,
+    AuthenticatedPSlugDashboardIndexRoute:
+      AuthenticatedPSlugDashboardIndexRoute,
+    AuthenticatedPSlugLiveIndexRoute: AuthenticatedPSlugLiveIndexRoute,
+    AuthenticatedPSlugProfileIndexRoute: AuthenticatedPSlugProfileIndexRoute,
+    AuthenticatedPSlugRosterIndexRoute: AuthenticatedPSlugRosterIndexRoute,
+    AuthenticatedPSlugStandingsIndexRoute:
+      AuthenticatedPSlugStandingsIndexRoute,
+  }
+
+const AuthenticatedPSlugRouteRouteWithChildren =
+  AuthenticatedPSlugRouteRoute._addFileChildren(
+    AuthenticatedPSlugRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
-  AuthenticatedRosterIndexRoute: typeof AuthenticatedRosterIndexRoute
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
-  AuthenticatedStandingsIndexRoute: typeof AuthenticatedStandingsIndexRoute
+  AuthenticatedAccountRouteRoute: typeof AuthenticatedAccountRouteRouteWithChildren
+  AuthenticatedPSlugRouteRoute: typeof AuthenticatedPSlugRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
-  AuthenticatedRosterIndexRoute: AuthenticatedRosterIndexRoute,
-  AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
-  AuthenticatedStandingsIndexRoute: AuthenticatedStandingsIndexRoute,
+  AuthenticatedAccountRouteRoute: AuthenticatedAccountRouteRouteWithChildren,
+  AuthenticatedPSlugRouteRoute: AuthenticatedPSlugRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
