@@ -18,7 +18,7 @@ const poolNameValidator = z
   .min(3, "Pool name must be at least 3 characters")
   .max(50, "Pool name must be at most 50 characters");
 
-export const Route = createFileRoute("/_authenticated/dashboard/")({
+export const Route = createFileRoute("/_authenticated/_account/dashboard/")({
   component: DashboardPage,
 });
 

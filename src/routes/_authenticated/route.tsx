@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-import { AccountNavBar } from "@/components/account-nav-bar";
 import { authQueryOptions } from "@/lib/auth/queries";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -11,14 +10,5 @@ export const Route = createFileRoute("/_authenticated")({
       throw redirect({ to: "/auth/sign-in" });
     }
   },
-  component: AuthenticatedLayout,
+  component: () => <Outlet />,
 });
-
-function AuthenticatedLayout() {
-  return (
-    <>
-      <AccountNavBar />
-      <Outlet />
-    </>
-  );
-}

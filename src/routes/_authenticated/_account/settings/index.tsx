@@ -8,7 +8,7 @@ const searchSchema = z.object({
   setup: z.boolean().optional(),
 });
 
-export const Route = createFileRoute("/_authenticated/settings/")({
+export const Route = createFileRoute("/_authenticated/_account/settings/")({
   validateSearch: searchSchema,
   component: SettingsPage,
 });

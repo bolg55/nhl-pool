@@ -14,10 +14,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
-import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
+import { Route as AuthenticatedAccountRouteRouteImport } from './routes/_authenticated/_account/route'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AuthenticatedPSlugRouteRouteImport } from './routes/_authenticated/p/$slug/route'
+import { Route as AuthenticatedAccountSettingsIndexRouteImport } from './routes/_authenticated/_account/settings/index'
+import { Route as AuthenticatedAccountDashboardIndexRouteImport } from './routes/_authenticated/_account/dashboard/index'
 import { Route as AuthenticatedPSlugStandingsIndexRouteImport } from './routes/_authenticated/p/$slug/standings/index'
 import { Route as AuthenticatedPSlugRosterIndexRouteImport } from './routes/_authenticated/p/$slug/roster/index'
 import { Route as AuthenticatedPSlugLiveIndexRouteImport } from './routes/_authenticated/p/$slug/live/index'
@@ -48,16 +49,9 @@ const AuthCallbackRoute = AuthCallbackRouteImport.update({
   path: '/auth/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSettingsIndexRoute =
-  AuthenticatedSettingsIndexRouteImport.update({
-    id: '/settings/',
-    path: '/settings/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardIndexRoute =
-  AuthenticatedDashboardIndexRouteImport.update({
-    id: '/dashboard/',
-    path: '/dashboard/',
+const AuthenticatedAccountRouteRoute =
+  AuthenticatedAccountRouteRouteImport.update({
+    id: '/_account',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
@@ -70,6 +64,18 @@ const AuthenticatedPSlugRouteRoute = AuthenticatedPSlugRouteRouteImport.update({
   path: '/p/$slug',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAccountSettingsIndexRoute =
+  AuthenticatedAccountSettingsIndexRouteImport.update({
+    id: '/settings/',
+    path: '/settings/',
+    getParentRoute: () => AuthenticatedAccountRouteRoute,
+  } as any)
+const AuthenticatedAccountDashboardIndexRoute =
+  AuthenticatedAccountDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedAccountRouteRoute,
+  } as any)
 const AuthenticatedPSlugStandingsIndexRoute =
   AuthenticatedPSlugStandingsIndexRouteImport.update({
     id: '/standings/',
@@ -108,8 +114,8 @@ export interface FileRoutesByFullPath {
   '/auth/sign-up': typeof AuthSignUpRoute
   '/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
-  '/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/dashboard/': typeof AuthenticatedAccountDashboardIndexRoute
+  '/settings/': typeof AuthenticatedAccountSettingsIndexRoute
   '/p/$slug/admin/': typeof AuthenticatedPSlugAdminIndexRoute
   '/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
   '/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
@@ -123,8 +129,8 @@ export interface FileRoutesByTo {
   '/auth/sign-up': typeof AuthSignUpRoute
   '/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/dashboard': typeof AuthenticatedDashboardIndexRoute
-  '/settings': typeof AuthenticatedSettingsIndexRoute
+  '/dashboard': typeof AuthenticatedAccountDashboardIndexRoute
+  '/settings': typeof AuthenticatedAccountSettingsIndexRoute
   '/p/$slug/admin': typeof AuthenticatedPSlugAdminIndexRoute
   '/p/$slug/dashboard': typeof AuthenticatedPSlugDashboardIndexRoute
   '/p/$slug/live': typeof AuthenticatedPSlugLiveIndexRoute
@@ -135,13 +141,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/_account': typeof AuthenticatedAccountRouteRouteWithChildren
   '/auth/callback': typeof AuthCallbackRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/_authenticated/p/$slug': typeof AuthenticatedPSlugRouteRouteWithChildren
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/_authenticated/_account/dashboard/': typeof AuthenticatedAccountDashboardIndexRoute
+  '/_authenticated/_account/settings/': typeof AuthenticatedAccountSettingsIndexRoute
   '/_authenticated/p/$slug/admin/': typeof AuthenticatedPSlugAdminIndexRoute
   '/_authenticated/p/$slug/dashboard/': typeof AuthenticatedPSlugDashboardIndexRoute
   '/_authenticated/p/$slug/live/': typeof AuthenticatedPSlugLiveIndexRoute
@@ -183,13 +190,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/_authenticated/_account'
     | '/auth/callback'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/_authenticated/p/$slug'
     | '/api/auth/$'
-    | '/_authenticated/dashboard/'
-    | '/_authenticated/settings/'
+    | '/_authenticated/_account/dashboard/'
+    | '/_authenticated/_account/settings/'
     | '/_authenticated/p/$slug/admin/'
     | '/_authenticated/p/$slug/dashboard/'
     | '/_authenticated/p/$slug/live/'
@@ -243,18 +251,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/settings'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/': {
-      id: '/_authenticated/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+    '/_authenticated/_account': {
+      id: '/_authenticated/_account'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedAccountRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/auth/$': {
@@ -270,6 +271,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/p/$slug'
       preLoaderRoute: typeof AuthenticatedPSlugRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_account/settings/': {
+      id: '/_authenticated/_account/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AuthenticatedAccountSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedAccountRouteRoute
+    }
+    '/_authenticated/_account/dashboard/': {
+      id: '/_authenticated/_account/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedAccountDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedAccountRouteRoute
     }
     '/_authenticated/p/$slug/standings/': {
       id: '/_authenticated/p/$slug/standings/'
@@ -309,6 +324,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAccountRouteRouteChildren {
+  AuthenticatedAccountDashboardIndexRoute: typeof AuthenticatedAccountDashboardIndexRoute
+  AuthenticatedAccountSettingsIndexRoute: typeof AuthenticatedAccountSettingsIndexRoute
+}
+
+const AuthenticatedAccountRouteRouteChildren: AuthenticatedAccountRouteRouteChildren =
+  {
+    AuthenticatedAccountDashboardIndexRoute:
+      AuthenticatedAccountDashboardIndexRoute,
+    AuthenticatedAccountSettingsIndexRoute:
+      AuthenticatedAccountSettingsIndexRoute,
+  }
+
+const AuthenticatedAccountRouteRouteWithChildren =
+  AuthenticatedAccountRouteRoute._addFileChildren(
+    AuthenticatedAccountRouteRouteChildren,
+  )
+
 interface AuthenticatedPSlugRouteRouteChildren {
   AuthenticatedPSlugAdminIndexRoute: typeof AuthenticatedPSlugAdminIndexRoute
   AuthenticatedPSlugDashboardIndexRoute: typeof AuthenticatedPSlugDashboardIndexRoute
@@ -334,15 +367,13 @@ const AuthenticatedPSlugRouteRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAccountRouteRoute: typeof AuthenticatedAccountRouteRouteWithChildren
   AuthenticatedPSlugRouteRoute: typeof AuthenticatedPSlugRouteRouteWithChildren
-  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAccountRouteRoute: AuthenticatedAccountRouteRouteWithChildren,
   AuthenticatedPSlugRouteRoute: AuthenticatedPSlugRouteRouteWithChildren,
-  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
-  AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
