@@ -324,15 +324,21 @@ Wrapper for the public NHL-e API (`https://api-web.nhle.com/v1`).
 
 The only code that calls the API service wrappers. Four sync operations:
 
-### `syncPlayers()` — Admin-triggered
+### `syncPlayers()` — Automated daily + admin override
 
-1. Optionally call `triggerPlayerScrape()` to refresh upstream data
+Runs automatically once daily (e.g., morning) to keep player/salary data fresh. Also available as an admin-triggered manual sync for when a trade or signing breaks mid-day and fresh data is needed immediately.
+
+1. If admin-triggered: optionally call `triggerPlayerScrape()` to refresh upstream data first
 2. Call `fetchPlayers()` to get all players
-3. Upsert into `players` table (match on `nhlId`)
+3. Upsert into `players` table (match on `nhlId`) — includes salary, position, team, injury fields
 4. Update `lastSyncedAt` on all upserted rows
 5. Return sync result (count updated, timestamp)
 
-### `syncInjuries()` — Admin-triggered
+Note: The upstream NHL Salary API refreshes injury data every 3 hours automatically. The daily sync picks up injury changes along with player data. More frequent injury polling is a polish consideration — injury status is informational (users can't act on it mid-week), but useful for context when a rostered player doesn't score.
+
+### `syncInjuries()` — Admin override only
+
+Manual trigger for when an admin wants to force an upstream injury re-scrape outside the normal daily sync cycle.
 
 1. Call `triggerInjuryScrape()` to refresh upstream injury data
 2. Call `fetchPlayers()` to get updated player data (injuries are embedded on player objects)
