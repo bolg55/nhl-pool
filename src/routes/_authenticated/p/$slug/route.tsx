@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
-import { PoolNavBar } from "@/components/pool-nav-bar";
+import { NavBar } from "@/components/nav-bar";
 import { $getPoolBySlug } from "@/server/functions/pool-context";
 
 export const Route = createFileRoute("/_authenticated/p/$slug")({
@@ -26,7 +26,7 @@ function PoolLayout() {
 
   return (
     <>
-      <PoolNavBar poolName={pool.name} slug={pool.slug} role={role} />
+      <NavBar pool={{ poolName: pool.name, slug: pool.slug, role }} />
       <div className="pb-16 md:pb-0">
         <Outlet />
       </div>

@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-import { AccountNavBar } from "@/components/account-nav-bar";
+import { NavBar } from "@/components/nav-bar";
 
 export const Route = createFileRoute("/_authenticated/_account")({
   component: AccountLayout,
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/_authenticated/_account")({
 function AccountLayout() {
   return (
     <>
-      <AccountNavBar />
+      <NavBar />
       <Outlet />
     </>
   );
