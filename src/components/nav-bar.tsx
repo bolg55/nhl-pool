@@ -62,7 +62,7 @@ export function NavBar({ pool }: NavBarProps) {
         ...(pool.role === "owner"
           ? [{ to: "/p/$slug/admin" as const, label: "Admin", icon: RiAdminLine }]
           : []),
-        { to: "/p/$slug/settings" as const, label: "Settings", icon: RiSettingsLine },
+        { to: "/p/$slug/profile" as const, label: "Profile", icon: RiSettingsLine },
       ]
     : [];
 
@@ -97,12 +97,12 @@ export function NavBar({ pool }: NavBarProps) {
               ))
             ) : (
               <Link
-                to="/settings"
+                to="/profile"
                 className={cn(baseTrigger, desktopUnderline)}
                 activeProps={{ className: cn(baseTrigger, activeTrigger) }}
               >
                 <RiSettingsLine className="size-4" />
-                Settings
+                Profile
               </Link>
             )}
             <button onClick={handleSignOut} className={baseTrigger} type="button">
@@ -130,7 +130,7 @@ export function NavBar({ pool }: NavBarProps) {
               </Link>
             ))}
             <Link
-              to="/p/$slug/settings"
+              to="/p/$slug/profile"
               params={{ slug: pool.slug }}
               className={cn(baseTrigger, mobileTab, mobileOverline)}
               activeProps={{ className: cn(baseTrigger, activeTrigger, mobileTab) }}
@@ -145,7 +145,7 @@ export function NavBar({ pool }: NavBarProps) {
           <div className="flex items-center justify-between px-4 py-3">
             <span className="text-lg font-semibold">NHL Pool</span>
             <div className="flex items-center gap-3">
-              <Link to="/settings" className="text-foreground/60 hover:text-foreground">
+              <Link to="/profile" className="text-foreground/60 hover:text-foreground">
                 <RiSettingsLine className="size-5" />
               </Link>
               <button

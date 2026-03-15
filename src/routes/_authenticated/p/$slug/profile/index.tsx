@@ -8,7 +8,7 @@ const searchSchema = z.object({
   setup: z.boolean().optional(),
 });
 
-export const Route = createFileRoute("/_authenticated/p/$slug/settings/")({
+export const Route = createFileRoute("/_authenticated/p/$slug/profile/")({
   validateSearch: searchSchema,
   component: SettingsPage,
 });
@@ -19,7 +19,7 @@ function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-3xl font-bold">Profile Settings</h1>
+      <h1 className="text-3xl font-bold">Profile</h1>
 
       {setup && !user?.name && (
         <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
