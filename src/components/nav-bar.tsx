@@ -5,7 +5,7 @@ import {
   RiLiveLine,
   RiLogoutBoxLine,
   RiMoreLine,
-  RiSettingsLine,
+  RiUserLine,
   RiTrophyLine,
 } from "@remixicon/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -62,7 +62,7 @@ export function NavBar({ pool }: NavBarProps) {
         ...(pool.role === "owner"
           ? [{ to: "/p/$slug/admin" as const, label: "Admin", icon: RiAdminLine }]
           : []),
-        { to: "/p/$slug/profile" as const, label: "Profile", icon: RiSettingsLine },
+        { to: "/p/$slug/profile" as const, label: "Profile", icon: RiUserLine },
       ]
     : [];
 
@@ -101,7 +101,7 @@ export function NavBar({ pool }: NavBarProps) {
                 className={cn(baseTrigger, desktopUnderline)}
                 activeProps={{ className: cn(baseTrigger, activeTrigger) }}
               >
-                <RiSettingsLine className="size-4" />
+                <RiUserLine className="size-4" />
                 Profile
               </Link>
             )}
@@ -146,7 +146,7 @@ export function NavBar({ pool }: NavBarProps) {
             <span className="text-lg font-semibold">NHL Pool</span>
             <div className="flex items-center gap-3">
               <Link to="/profile" className="text-foreground/60 hover:text-foreground">
-                <RiSettingsLine className="size-5" />
+                <RiUserLine className="size-5" />
               </Link>
               <button
                 onClick={handleSignOut}
